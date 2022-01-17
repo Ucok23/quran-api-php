@@ -4,4 +4,4 @@ require "./model/surah.php";
 
 $surah = new Surah("data/quran.json");
 
-print_r($surah->getSurah(114));
+print_r($surah->getAyahFromSurah(1, 1));

@@ -3,8 +3,8 @@
 class Surah {  
     function __construct($_quran_file) {
         $quran_file = file_get_contents($_quran_file);
-        $quran_json = json_decode($quran_file, true)["data"];
-        $this->quran = $quran_json;
+        $quran_json = json_decode($quran_file, true);
+        $this->quran = $quran_json["data"];
     }
 
     function _checkSurah($_surah) {
@@ -14,7 +14,7 @@ class Surah {
     }
 
     function _checkAyah($_surah, $_ayah) {
-        if ($_ayah < 0 || $_ayah > $this->quran[$_surah]["numberOfVerses"]) {
+        if ($_ayah < 0 || $_ayah > $this->quran[$_surah -1]["numberOfVerses"]) {
             return false;
         }
     }
@@ -37,7 +37,7 @@ class Surah {
 
     function getAyahFromSurah($_surah, $_ayah) {
         $surah = $this->getSurah($_surah);
-        $this->_checkAyah($surah, $_ayah);
+        $this->_checkAyah($_surah, $_ayah);
         $ayah = $surah["verses"][$_ayah - 1];
         return $ayah;
     }
