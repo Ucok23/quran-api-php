@@ -1,7 +1,26 @@
 <?php
 
-require "./model/surah.php";
+include_once 'Request.php';
+include_once 'Router.php';
+include_once 'model/surah.php';
 
-$surah = new Surah("data/quran.json");
+$router = new Router(new Request);
+$surahHandler = new Surah("data/quran.json");
 
-print_r($surah->getAyahFromSurah(1, 1));
+$router->get('/', function() {
+  return <<<HTML
+  <h1>Hello world</h1>
+HTML;
+});
+
+
+$router->get('/profile', function($request) {
+  return <<<HTML
+  <h1>Profile</h1>
+HTML;
+});
+
+$router->post('/data', function($request) {
+
+  return json_encode($request->getBody());
+});
