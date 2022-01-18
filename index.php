@@ -14,10 +14,9 @@ HTML;
 });
 
 
-$router->get('/profile', function($request) {
-  return <<<HTML
-  <h1>Profile</h1>
-HTML;
+$router->get('/all', function($surahHandler) {
+    header('Content-Type: application/json; charset=utf-8');
+    $surahHandler->getAllSurah();
 });
 
 $router->post('/data', function($request) {
