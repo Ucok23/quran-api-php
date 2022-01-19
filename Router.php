@@ -55,12 +55,8 @@ class Router
   function resolve()
   {
     $methodDictionary = $this->{strtolower($this->request->requestMethod)};
-    echo "<br/>";
-    print_r($methodDictionary);
     $formatedRoute = $this->formatRoute($this->request->requestUri);
     $method = $methodDictionary[$formatedRoute];
-    echo "<br/>";
-    print_r($method);
 
     if(is_null($method))
     {

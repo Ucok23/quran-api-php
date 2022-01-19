@@ -1,16 +1,19 @@
 <?php
 include_once 'IRequest.php';
+include_once 'model/surah.php';
+
 
 class Request implements IRequest
 {
   function __construct()
   {
+    $surahHandler = new Surah("data/quran.json");
+    $this->surahHandler = $surahHandler;
     $this->bootstrapSelf();
   }
 
   private function bootstrapSelf()
   {
-    print_r($_SERVER);
     foreach($_SERVER as $key => $value)
     {
       $this->{$this->toCamelCase($key)} = $value;
@@ -28,7 +31,6 @@ class Request implements IRequest
         $c = str_replace('_', '', strtoupper($match));
         $result = str_replace($match, $c, $result);
     }
-
     return $result;
   }
 
@@ -51,5 +53,9 @@ class Request implements IRequest
 
       return $body;
     }
+  }
+
+  public function getAllSurah(){
+    $this->surahHandler->getAllSurah();
   }
 }

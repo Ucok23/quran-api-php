@@ -2,10 +2,8 @@
 
 include_once 'Request.php';
 include_once 'Router.php';
-include_once 'model/surah.php';
 
 $router = new Router(new Request);
-$surahHandler = new Surah("data/quran.json");
 
 $router->get('/', function() {
   return <<<HTML
@@ -13,10 +11,16 @@ $router->get('/', function() {
 HTML;
 });
 
-
-$router->get('/all', function($surahHandler) {
+$router->get('/all', function($request) {
     header('Content-Type: application/json; charset=utf-8');
-    $surahHandler->getAllSurah();
+    echo json_encode($request->surahHandler->getAllSurah());
+});
+
+
+// To Do: routing with param
+$router->get('/all/:all', function($request) {
+  header('Content-Type: application/json; charset=utf-8');
+  echo json_encode($request->surahHandler->getAllSurah());
 });
 
 $router->post('/data', function($request) {
