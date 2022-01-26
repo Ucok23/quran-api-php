@@ -22,8 +22,3 @@ $router->get('/all/:all', function($request) {
   header('Content-Type: application/json; charset=utf-8');
   echo json_encode($request->surahHandler->getAllSurah());
 });
-
-$router->post('/data', function($request) {
-
-  return json_encode($request->getBody());
-});
